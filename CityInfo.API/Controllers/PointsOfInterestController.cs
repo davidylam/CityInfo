@@ -16,20 +16,32 @@ namespace CityInfo.API.Controllers
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
         [HttpGet]
-        public ActionResult<IEnumerable<PointOfInterestDto>> GetPointsOfInterest(int cityId) {
-            var city = CitiesDataStore.Current.Cities.FirstOrDefault(c => c.Id == cityId);
-
-            if (city == null)
+        public ActionResult<IEnumerable<PointOfInterestDto>> GetPointsOfInterest(int cityId)
+        {
+            try
             {
-                logger.LogInformation($"City with id {cityId} wasn't found when accessing points of interest.");
-                return NotFound();
-            }
+            throw new Exception("Exception sample.");
+                var city = CitiesDataStore.Current.Cities.FirstOrDefault(c => c.Id == cityId);
 
-            return Ok(city);
+                if (city == null)
+                {
+                    logger.LogInformation($"City with id {cityId} wasn't found when accessing points of interest.");
+                    return NotFound();
+                }
+
+                return Ok(city);
+
+            }
+            catch (Exception ex)
+            {
+                logger.LogCritical($"Exception while getting points of interest for city with id {cityId}", ex);
+                return StatusCode(500, "A problem happened while handlin you request");
+            }
         }
 
-        [HttpGet("{pointOfInterestId}", Name ="GetPointOfInterest")]
-        public ActionResult<PointOfInterestDto> GetPointOfInterest(int cityId, int pointOfInterestId) {
+        [HttpGet("{pointOfInterestId}", Name = "GetPointOfInterest")]
+        public ActionResult<PointOfInterestDto> GetPointOfInterest(int cityId, int pointOfInterestId)
+        {
 
             var city = CitiesDataStore.Current.Cities.FirstOrDefault(c => c.Id == cityId);
 
@@ -48,7 +60,8 @@ namespace CityInfo.API.Controllers
         }
 
         [HttpPost]
-        public ActionResult<PointOfInterestDto> CreatePointOfInterest(int cityId, PointOfInterestForCreationDto pointOfInterest) {
+        public ActionResult<PointOfInterestDto> CreatePointOfInterest(int cityId, PointOfInterestForCreationDto pointOfInterest)
+        {
 
             var city = CitiesDataStore.Current.Cities.FirstOrDefault(c => c.Id == cityId);
             if (city == null)
@@ -75,7 +88,8 @@ namespace CityInfo.API.Controllers
 
 
         [HttpPut("{pointofinterestid}")]
-        public ActionResult UpdatePointOfInterest(int cityId, int pointOfInterestId, PointOfInterestForUpdateDto pointOfInterest) {
+        public ActionResult UpdatePointOfInterest(int cityId, int pointOfInterestId, PointOfInterestForUpdateDto pointOfInterest)
+        {
             var city = CitiesDataStore.Current.Cities.FirstOrDefault(c => c.Id == cityId);
 
             if (city == null)
@@ -96,7 +110,8 @@ namespace CityInfo.API.Controllers
         }
 
         [HttpPatch("{pointofinterestid}")]
-        public ActionResult PartiallyUpdatePointOfInterest(int cityId, int pointOfInterestId, JsonPatchDocument<PointOfInterestForUpdateDto> patchDocument) {
+        public ActionResult PartiallyUpdatePointOfInterest(int cityId, int pointOfInterestId, JsonPatchDocument<PointOfInterestForUpdateDto> patchDocument)
+        {
 
             var city = CitiesDataStore.Current.Cities.FirstOrDefault(c => c.Id == cityId);
 
@@ -119,7 +134,7 @@ namespace CityInfo.API.Controllers
 
             patchDocument.ApplyTo(pointOfInterestToPatch, ModelState);
 
-            
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
