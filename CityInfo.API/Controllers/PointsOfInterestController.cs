@@ -9,12 +9,19 @@ namespace CityInfo.API.Controllers
     [ApiController]
     public class PointsOfInterestController : ControllerBase
     {
+        private readonly ILogger<PointOfInterestDto> logger;
+
+        public PointsOfInterestController(ILogger<PointOfInterestDto> logger)
+        {
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        }
         [HttpGet]
-        public ActionResult<IEnumerable<PointsOfInterestController>> GetPointsOfInterest(int cityId) {
+        public ActionResult<IEnumerable<PointOfInterestDto>> GetPointsOfInterest(int cityId) {
             var city = CitiesDataStore.Current.Cities.FirstOrDefault(c => c.Id == cityId);
 
             if (city == null)
             {
+                logger.LogInformation($"City with id {cityId} wasn't found when accessing points of interest.");
                 return NotFound();
             }
 
@@ -22,7 +29,7 @@ namespace CityInfo.API.Controllers
         }
 
         [HttpGet("{pointOfInterestId}", Name ="GetPointOfInterest")]
-        public ActionResult<PointsOfInterestController> GetPointOfInterest(int cityId, int pointOfInterestId) {
+        public ActionResult<PointOfInterestDto> GetPointOfInterest(int cityId, int pointOfInterestId) {
 
             var city = CitiesDataStore.Current.Cities.FirstOrDefault(c => c.Id == cityId);
 
