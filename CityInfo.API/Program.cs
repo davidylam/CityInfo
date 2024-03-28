@@ -13,6 +13,7 @@ Log.Logger = new LoggerConfiguration()
 
 
 
+
 var builder = WebApplication.CreateBuilder(args);
 //builder.Logging.ClearProviders();
 //builder.Logging.AddConsole();
@@ -51,7 +52,7 @@ builder.Services.AddSingleton<FileExtensionContentTypeProvider>();
 
 builder.Services.AddSingleton<CitiesDataStore>();
 builder.Services.AddDbContext<CityInfoContext>(
-    dbContextOptions => dbContextOptions.UseSqlite("Data Source=CityInfo.db"));
+    dbContextOptions => dbContextOptions.UseSqlite(builder.Configuration["ConnectionStrings:CityInfoDBConnectionString"]));
 
 var app = builder.Build();
 
