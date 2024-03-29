@@ -82,27 +82,27 @@ public class PointsOfInterestController : ControllerBase
             createdPointOfInterestToReturn);
     }
 
-    //[HttpPut("{pointofinterestid}")]
-    //public ActionResult UpdatePointOfInterest(int cityId, int pointOfInterestId, PointOfInterestForUpdateDto pointOfInterest)
-    //{
-    //    var city = _citiesDataStore.Cities.FirstOrDefault(c => c.Id == cityId);
+    [HttpPut("{pointofinterestid}")]
+    public async Task<ActionResult> UpdatePointOfInterest(int cityId, int pointOfInterestId, PointOfInterestForUpdateDto pointOfInterest)
+    {
+      if (!await _cityInfoRepository.CityExistsAsync(cityId))
+        {
+            return NotFound();
+        }
 
-    //    if (city == null)
-    //    {
-    //        return NotFound();
-    //    }
+        var pointOfInterestEntity = await _cityInfoRepository.GetPointOfInterestForCityAsync(cityId, pointOfInterestId);
 
-    //    var pointOfInterestFromStore = city.PointsOfInterest.First(c => c.Id == pointOfInterestId);
-    //    if (pointOfInterestFromStore == null)
-    //    {
-    //        return NotFound();
-    //    }
+        if (pointOfInterestEntity == null)
+        {
+            return NotFound();
+        }
 
-    //    pointOfInterestFromStore.Name = pointOfInterest.Name;
-    //    pointOfInterestFromStore.Description = pointOfInterest.Description;
+        _mapper.Map(pointOfInterest, pointOfInterestEntity);
 
-    //    return NoContent();
-    //}
+        await _cityInfoRepository.SaveChanger();
+
+        return NoContent();
+    }
 
     //[HttpPatch("{pointofinterestid}")]
     //public ActionResult PartiallyUpdatePointOfInterest(int cityId, int pointOfInterestId, JsonPatchDocument<PointOfInterestForUpdateDto> patchDocument)
