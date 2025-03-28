@@ -1,0 +1,13 @@
+name: Second Workflow
+on: workflow_dispatch
+jobs: 
+  dlam-job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: richardrigutins/replace-in-files@v2
+        with:
+          files: 'README.md'
+          search-text: 'version'
+          replacement-text: '42'
+          
+          
