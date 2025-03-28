@@ -7,9 +7,9 @@ jobs:
       - uses: bluwy/substitute-string-action@v3
         id: sub2
         with:
-          _input-file: './README.md'
+          _input-text: 'Hello human, %%human%%'
           _format-key: '%%key%%'
           _output-file: './README2.md'
-          version: 'dlam was here'
+          human: 'dlam was here'
           
           
