@@ -13,7 +13,7 @@ jobs:
       - uses: bluwy/substitute-string-action@v3
         id: sub2
         with:
-          _input-file: 'README.md'
+          _input-file: './README.md'
           _format-key: '%%key%%'
           version: ${{ github.ref }}
           
