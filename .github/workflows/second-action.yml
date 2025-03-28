@@ -1,7 +1,7 @@
 name: Second Workflow
 on: workflow_dispatch
 jobs: 
-  first-job:
+  dlam-job:
     runs-on: ubuntu-latest
     steps:
       - uses: bluwy/substitute-string-action@v3
