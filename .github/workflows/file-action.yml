@@ -1,7 +1,7 @@
-name: Second Workflow
+name: File Action
 on: workflow_dispatch
 jobs: 
-  dlam-job:
+  file-action-job:
     runs-on: ubuntu-latest
     steps:
       - uses: richardrigutins/replace-in-files@v2
