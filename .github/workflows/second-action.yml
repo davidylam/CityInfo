@@ -10,3 +10,10 @@ jobs:
           _input-text: 'Hello World!'
           World: GitHub
       - run: echo ${{ steps.sub.outputs.result }} # Prints 'Hello GitHub!'
+      - uses: bluwy/substitute-string-action@v3
+        id: sub2
+        with:
+          _input-file: 'README.md'
+          _format-key: '%%key%%'
+          version: ${{ github.ref }}
+          
