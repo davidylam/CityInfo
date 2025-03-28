@@ -6,7 +6,7 @@ jobs:
     steps:
       - uses: richardrigutins/replace-in-files@v2
         with:
-          files: 'README.md'
+          files: '**/*.md'
           search-text: 'version'
           replacement-text: '42'
           
