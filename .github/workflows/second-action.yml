@@ -9,5 +9,5 @@ jobs:
         with:
           _input-file: './README.md'
           _format-key: '%%key%%'
-          version: ${{ github.ref }}
+          version: 'dlam was here'
           
