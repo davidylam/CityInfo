@@ -9,5 +9,7 @@ jobs:
         with:
           _input-file: './README.md'
           _format-key: '%%key%%'
+          _output-file: './README2.md'
           version: 'dlam was here'
+          
           
