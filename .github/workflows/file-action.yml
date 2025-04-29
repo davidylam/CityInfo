@@ -10,5 +10,5 @@ jobs:
         with:
           file: README.md
           old-string: version
-          new-string: ${{ dlam }}
+          new-string: XXX
           
