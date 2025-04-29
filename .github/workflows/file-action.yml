@@ -4,15 +4,11 @@ jobs:
   file-action-job:
     runs-on: ubuntu-latest
     steps:
-      - uses: richardrigutins/replace-in-files@v2
+      - uses: actions/checkout@v3
+      - name: Replace string in file
+        uses: MathieuSoysal/replace-string-in-file@v1.0.0
         with:
-          files: '**/*.md'
-          search-text: 'version'
-          replacement-text: '42'
-      - name: Replace single file
-        uses: richardrigutins/replace-in-files@v2
-        with:
-          files: 'README.md'
-          search-text: 'Hello'
-          replacement-text: 'dlam'
+          file: README.md
+          old-string: version
+          new-string: ${{ dlam }}
           
