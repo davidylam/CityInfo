@@ -1,5 +1,10 @@
 name: First WorkflowYYY
-on: workflow_dispatch
+on: 
+  push:
+    branches:
+      - main
+    paths:
+      - 'README.md'
 jobs: 
   first-job:
     runs-on: ubuntu-latest
