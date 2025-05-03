@@ -5,6 +5,7 @@ on:
       - main
     paths:
       - 'README.md'
+      - 'CityInfo.API/README2.md'
 jobs: 
   first-job:
     runs-on: ubuntu-latest
