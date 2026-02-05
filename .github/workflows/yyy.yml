@@ -1,11 +1,5 @@
 name: First WorkflowYYY
-on: 
-  push:
-    branches:
-      - main
-    paths:
-      - 'README.md'
-      - 'CityInfo.API/README2.md'
+on: workflow_dispatch
 jobs: 
   first-job:
     runs-on: ubuntu-latest
