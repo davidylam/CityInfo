@@ -14,3 +14,8 @@ jobs:
         run: echo "Hello World"
       - name: Print goodbye
         run: echo "Done DLam"
+        
+      - name: Remove README.md
+        uses: JesseTG/rm@v1.0.3
+        with:
+          path: /README.md
